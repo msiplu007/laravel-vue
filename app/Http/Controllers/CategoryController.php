@@ -12,9 +12,24 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function getAllCategory(){
+        $categories = Category::all();
+        return response()->json([
+            'categories' => $categories
+        ],200);
+     }
+    public function mutipleDelete(Request $request)
+    {
+       foreach($request->all() as $category){
+           Category::find($category['id'])->delete();
+       }
+    }
+
+
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::latest()->paginate(10);
         return response()->json([
             'categories' => $categories
         ],200);
@@ -38,7 +53,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $request->validate([
+           'name' => 'required'
+       ]);
+
+       Category::create($request->all());
+
     }
 
     /**
@@ -72,7 +92,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $category->update($request->all());
+
     }
 
     /**
@@ -83,6 +108,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+       $category->delete();
+       return $this->index();
     }
 }

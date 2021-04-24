@@ -4,7 +4,7 @@ export const admin = {
     namespaced: true,
 
     state:{
-      admin: [],
+      admin: {},
     },
     getters:{
         getAuthUser(state) {
@@ -20,10 +20,12 @@ export const admin = {
 
             });
          },
+
     },
     mutations: {
         getUser(state, payload){
             return state.admin = payload
         }
     }
+
 }

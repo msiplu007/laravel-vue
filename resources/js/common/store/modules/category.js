@@ -12,7 +12,19 @@ export const category = {
     },
     actions: {
         categoryList(context, payload) {
-            Axios.get('/admin/category/')
+            Axios.get('/admin/category/?page='+payload)
+            .then(res=>{
+                context.commit('categoryList', res.data.categories)
+            })
+        },
+        deleteCategory(context, payload){
+            Axios.delete('/admin/category/'+payload)
+            .then(res=>{
+                context.commit('categoryList', res.data.categories)
+            })
+        },
+        categoryListAll(context){
+            Axios.get('/admin/all-category')
             .then(res=>{
                 context.commit('categoryList', res.data.categories)
             })

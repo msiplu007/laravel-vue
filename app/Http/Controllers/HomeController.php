@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,5 +24,13 @@ class HomeController extends Controller
         return response ()->json([
             'user' => \Auth::user()
          ],200);
+    }
+
+    public function userList()
+    {
+       $user_list = User::paginate(5);
+       return response()->json([
+          'user_list' => $user_list
+       ]);
     }
 }

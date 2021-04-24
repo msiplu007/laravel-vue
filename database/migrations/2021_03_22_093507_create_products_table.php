@@ -20,11 +20,11 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->float('price',8,2);
             $table->float('discount_price',8,2)->nullable();
-            $table->text('description');
+            $table->longText('description');
             $table->string('image');
             $table->string('color')->nullable();
             $table->string('size')->nullable();
-            $table->unsignedInteger('quantity');
+            $table->string('quantity');
             $table->timestamps();
         });
     }

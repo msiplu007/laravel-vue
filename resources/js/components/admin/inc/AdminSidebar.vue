@@ -17,7 +17,7 @@
         <div class="info">
 
 
-        <a href="#" class="d-block">Md salauddin kader </a>
+        <a href="#" class="d-block">{{ admin.name}}</a>
 
         </div>
       </div>
@@ -131,6 +131,9 @@ export default {
       admin() {
         return this.$store.getters['admin/getAuthUser'];
       }
+    },
+    created() {
+        this.getAuthUser();
     },
 
 }

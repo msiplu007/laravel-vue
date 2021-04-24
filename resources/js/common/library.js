@@ -7,3 +7,5 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 
 Vue.use(ElementUI, { locale })
+
+import filter from './filter'

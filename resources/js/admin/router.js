@@ -14,6 +14,7 @@ import BrandList from '../components/admin/brand/BrandList'
 import ProductList from '../components/admin/product/ProductList'
 import CustomerList from '../components/admin/customer/CustomerList'
 import OrderList from '../components/admin/order/OrderList'
+import AddOrUpdateProduct from '../components/admin/product/AddOrUpdateProduct'
 
 
 const router = new VueRouter({
@@ -27,10 +28,11 @@ const router = new VueRouter({
         { path: '/admin/products', component: ProductList, name: 'ProductList' },
         { path: '/admin/customers', component: CustomerList, name: 'CustomerList' },
         { path: '/admin/orders', component: OrderList, name: 'OrderList' },
+        { path: '/admin/add-new-product', component: AddOrUpdateProduct, name: 'AddOrUpdateProduct' }
 
       ]
 
-  });
+  })
 
 
   router.beforeEach((to, from, next) => {

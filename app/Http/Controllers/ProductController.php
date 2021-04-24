@@ -14,7 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::latest()->paginate(10);
+        return response()->json([
+           'products' => $products
+        ]);
     }
 
     /**
@@ -22,6 +25,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mutipleDelete(Request $request)
+    {
+       foreach($request->all() as $product){
+           Product::find($product['id'])->delete();
+       }
+    }
     public function create()
     {
         //
@@ -35,7 +44,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->productValidation($request);
+        $product = new Product();
+        $request['image'] = 'test';
+        $product->create($request->all());
+        //dd($request->all());
     }
 
     /**
@@ -80,6 +93,29 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return $this->index();
     }
+ public function productValidation($request)
+ {
+    $request->validate([
+       'name'=>'required',
+        'price'=>'required',
+
+       ' description'=>'required',
+        //'image'=>'required',
+
+        'quantity'=>'required',
+
+        'category_id'=>'required',
+        'brand_id'=>'required',
+    ],
+    [
+        'category_id.required' => 'Category ID is required good',
+        'brand_id.required' => 'Brand ID is required',
+    ]
+
+);
+ }
+
 }

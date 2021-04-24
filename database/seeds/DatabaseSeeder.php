@@ -1,6 +1,8 @@
 <?php
 
 use App\Model\Admin;
+use App\Model\Brand;
+use App\Model\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
-        factory(Admin::class,1)->create();
+        // factory(Admin::class,1)->create();
+
+        factory(Product::class,50)->create();
     }
 }
